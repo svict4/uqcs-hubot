@@ -1,21 +1,21 @@
-// Description
+// Description:
 //   Gets the weather info or radar for st lucia by default or a specified location
 //
 //
 // Commands:
-//   !weather <location (opt)> - Gets the weather for a location (Defaults to Brisbane)
-//   !weather radar <location (opt)> - Gets the cloests BOM radar + weather
+//   !`weather` _<location (opt)>_ - Gets the weather for a location (Defaults to Brisbane)
+//   !`weather` `radar` _<location (opt)>_ - Gets the closets BOM radar + weather
 //
 
 var kdt = require("kd.tree");
 
 module.exports = function (robot) {
-  robot.hear(/^!weather radar ?(.+)?/i, function (res) {
+  robot.respond(/!?weather radar ?(.+)?/i, function (res) {
     var location = res.match[1] || "Brisbane";
     robot.getWeatherRadar(location, res)
   });
 
-  robot.hear(/^!weather ?(.+)?/i, function (res) {
+  robot.respond(/!?weather ?(.+)?/i, function (res) {
     var location = res.match[1] || "Brisbane";
     robot.getWeather(location, res)
   });

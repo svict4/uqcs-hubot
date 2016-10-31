@@ -1,14 +1,14 @@
-// Description
+// Description:
 //   Returns the availability list of library computers at St Lucia
 //
 // Commands:
-//   !computers - Lists the available computers at UQ
+//   !`computers` - Lists the available computers at UQ
 //
 
 var cheerio = require("cheerio");
 
 module.exports = function (robot) {
-	robot.hear(/^!computers/i, function (res) {
+	robot.respond(/!?computers/i, function (res) {
 		robot.http("https://www.library.uq.edu.au/uqlsm/availablepcsembed.php?stlucia").get() (function(err, resp, body) {
 			var $ = cheerio.load(body);
 			var computers = [];
@@ -42,9 +42,8 @@ module.exports = function (robot) {
 				var asciiPercentage = parseInt(Math.round(parseInt(percent_r.substring(0, percent_r.length-1)) / 10) * 10 / 2 / 10);
 
 				response += ">" + (Array(5 - asciiPercentage + 1).join("█"))
-				 + (Array(asciiPercentage + 1).join("▒")) + " *"
-				 + (100 - takenPercentage) + "% taken" + "*" + " - _" + free_r + "_"
-				 + "computers free @ " + computers[i][4] + " _" + name_r + "_" + "\r\n";
+				 + (Array(asciiPercentage + 1).join("▒")) + " " + computers[i][4] + " *"
+				 + (100 - takenPercentage) + "% taken*" + " - _" + free_r + "_ computers free @ _" + name_r + "_\r\n";
 			}
 
 			res.send(response);

@@ -2,8 +2,8 @@
 #   Generates help commands for Hubot.
 #
 # Commands:
-#   hubot help - Displays all of the help commands that Hubot knows about.
-#   hubot help <query> - Displays all help commands that match <query>.
+#   !`hubot` `help` - Displays all of the help commands that Hubot knows about.
+#   !`hubot` `help` _<query>_ - Displays all help commands that match <query>.
 #
 # URLS:
 #   /hubot/help
@@ -67,8 +67,8 @@ module.exports = (robot) ->
     emit = cmds.join "\n"
 
     unless msg.message.user.name == robot.name
-      robot.send({room: msg.message.user.name}, "Here are my commands")
-      robot.send({room: msg.message.user.name}, emit)
+      robot.send({room: msg.message.user.id}, "Here are my commands")
+      robot.send({room: msg.message.user.id}, emit)
 
   robot.router.get "/#{robot.name}/help", (req, res) ->
     cmds = renamedHelpCommands(robot).map (cmd) ->
@@ -86,4 +86,3 @@ renamedHelpCommands = (robot) ->
   help_commands = robot.helpCommands().map (command) ->
     command.replace /hubot/ig, robot_name
   help_commands.sort()
-
