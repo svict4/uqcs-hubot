@@ -5,7 +5,7 @@
   "author": "UQCS Committee (contact@uqcs.org.au)",
   "description": "A bot you can contribute to",
   "dependencies": {
-    "cheerio": "^0.19.0",
+    "cheerio": "^0.20.0",
     "hubot": "^2.17.0",
     "hubot-better-voting": "^1.0.0",
     "hubot-conversation": "^1.0.2",
